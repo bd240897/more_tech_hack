@@ -1,5 +1,5 @@
-# Web приложение для оплаты комунальных платежей "ВТБ Коммуналка"
-Проект на хакатон API VTB 2023
+# Веб/мобильный сервис подбора отделения банка VTB
+Проект на хакатон MORE.Tech_5.0
 
 Команда: **Win+ners**
 
@@ -20,15 +20,15 @@
 ## Команда
 1. [Дмитрий Борисов](https://t.me/DmitriiBorisov) - backend/frontend
 2. [Максим Кишик](https://t.me/kishikmaxim) - backend
-3. [Никита](https://t.me/ngrushet) - backend
-4. [Саша](https://t.me/Shurionaa) - product manager
-5. [Аня Мархаева](https://t.me/privetobnako) - designer
+3. [Аня Мархаева](https://t.me/privetobnako) - designer
+4. [Татьяна Чих](https://t.me/bezasfalta) - business-analyst
+5. [Максим Камал](https://t.me/Rainor1) - frontend
 
 [:arrow_up:Оглавление](#Оглавление)
 
 ## Задача
 ### Описание задачи
-Реализовать детектор заболеваний по фотографии poops для собак.
+Реализовать веб/мобильный сервис подбора отделения банка VTB.
 
 [:arrow_up:Оглавление](#Оглавление)
 
