@@ -47,6 +47,7 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
+// TODO unused theme
 const TabsCustom = styled(Tabs)<TabsProps>(({theme}) => ({
     backgroundColor: "white",
     "& .MuiPaper-root": {
@@ -80,6 +81,7 @@ function EntryPage() {
                         textColor="inherit"
                         variant="fullWidth"
                         aria-label="full width tabs example"
+                        sx={{width: "100%"}}
                     >
                         <Tab label="Вход"
                              sx={{
@@ -102,7 +104,7 @@ function EntryPage() {
                     </TabsCustom>
                 </AppBar>
 
-                <Box sx={{backgroundColor: "#000743", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px"}}>
+                <Box sx={{backgroundColor: "#000743", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px", width: "100%"}}>
                     <TabPanel value={value} index={0} dir={theme.direction}>
                         <Login setTabRegister={() => setValue(1)}/>
                     </TabPanel>
