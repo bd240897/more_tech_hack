@@ -11,25 +11,36 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText,
+    ListItemText, ToggleButton,
 } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {services, servicesFromData} from "@/common/services";
+import {styled} from "@mui/material/styles";
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 
 interface CustomDrawerProps {
     isDrawer: boolean,
-    setIsDrawer:  (value: (((prevState: boolean) => boolean) | boolean)) => void
+    setIsDrawer: (value: (((prevState: boolean) => boolean) | boolean)) => void
 }
 
-export default function CustomDrawer({isDrawer=false, setIsDrawer=()=>{}}: CustomDrawerProps) {
+const CustomToggleButton = styled(ToggleButton)({
+    backgroundColor: 'white',
+    "&.Mui-selected": {
+        color: "white",
+        backgroundColor: '#0564f3'
+    },
+    "&.Mui-selected:hover": {
+        color: "white",
+        backgroundColor: '#6a6a6a'
+    }
+});
 
-    // стейт открыт ли или нет
-    // const [state, setState] = React.useState(false);
+export default function CustomDrawer({isDrawer = false, setIsDrawer = () => {}}: CustomDrawerProps) {
 
+    const [isToggleButton, setIsToggleButton] = React.useState(false);
 
     /**
      * Переключает вкл и выкл меню
@@ -56,7 +67,7 @@ export default function CustomDrawer({isDrawer=false, setIsDrawer=()=>{}}: Custo
         <Box
             sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
             role="presentation"
-            onClick={toggleDrawer(false)}
+            // onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
         >
 
@@ -88,6 +99,22 @@ export default function CustomDrawer({isDrawer=false, setIsDrawer=()=>{}}: Custo
                         </ListItemButton>
                     </ListItem>
                 ))}
+                {/* TODO make buttons */}
+                <ListItem key={111111} disablePadding>
+                    <CustomToggleButton
+                        value="check"
+                        aria-label="left aligned"
+                        selected={isToggleButton}
+                        onChange={() => {
+                            setIsToggleButton(!isToggleButton);
+                        }}
+                        fullWidth
+                        sx={{mx: 2}}
+                    >
+                            2222222
+
+                    </CustomToggleButton>
+                </ListItem>
             </List>
 
         </Box>
@@ -103,6 +130,7 @@ export default function CustomDrawer({isDrawer=false, setIsDrawer=()=>{}}: Custo
                     anchor={'bottom'}
                     open={isDrawer}
                     onClose={toggleDrawer(false)}
+                    // onClick={event=>event.stopPropagation()}
                 >
                     {list('bottom')}
                 </Drawer>
