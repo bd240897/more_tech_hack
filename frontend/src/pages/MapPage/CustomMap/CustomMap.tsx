@@ -91,13 +91,11 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
         const dataAtms = await getAtms()
         const dataOffices = await getOffices()
         // Promise.all(getAtms(), getOffices())
-        if (dataAtms && dataAtms !== null) setPointsAtms(prepareAtmsPointData(dataAtms))
-        if (dataOffices && dataOffices !== null) setPointsOffices(prepareOfficesPointData(dataOffices))
+        if (dataAtms && dataAtms !== null) await setPointsAtms(prepareAtmsPointData(dataAtms))
+        if (dataOffices && dataOffices !== null) await setPointsOffices(prepareOfficesPointData(dataOffices))
         console.log("dataAtms", dataAtms)
         console.log("dataOffices", dataOffices)
     }
-
-
 
     /**
      * Ищет данные локации по id и тригерит модальное окно
@@ -186,7 +184,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                      height="100vh"
                      state={mapState}
                 >
-                    {isAtms &&
+                    {(isAtms & Boolean(pointsAtms.length)) &&
                         <ObjectManager
                             objects={{
                                 openBalloonOnClick: true,
@@ -215,7 +213,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                         />
                     }
 
-                    {isOffices &&
+                    {(isOffices & Boolean(pointsOffices.length)) &&
                         <ObjectManager
                             objects={{
                                 openBalloonOnClick: true,
