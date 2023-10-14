@@ -15,10 +15,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import {Link} from "react-router-dom";
 import {Key, useState} from "react";
+import {pages} from "@/common/services";
 
-
-const myPages = [{name: 'Login', link: "/"}, {name: 'Map', link: "/map"}, {name: 'About', link: "/about"}, ];
-const mySettings = ['Profile', 'Account', 'Logout'];
 
 const Header = () => {
 
@@ -36,44 +34,16 @@ const Header = () => {
     return (
         <>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar sx={{justifyContent: "space-between"}}>
 
-                    <MenuIcon/>
-
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component={Link}
-                        to={"/"}
-                        sx={{
-                            mr: 2,
-                            fontWeight: 200,
-                            fontFamily: 'roboto',
-                            color: 'white',
-                            letterSpacing: '.2rem',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Educative
-                    </Typography>
-
-                    <Box sx={{flexWrap: 'wrap', flexGrow: 1, display: 'flex'}}>
-                        {myPages.map((page) => (
-                            <Button
-                                key={page as Key}
-                                component={Link} to={page.link}
-                                sx={{my: 2, color: 'white', display: 'block', textDecoration: "none"}}
-                            >
-                                {page.name}
-                            </Button>
-                        ))}
-                    </Box>
-                    <Box sx={{flexGrow: 0}}>
-                        <Tooltip title="Open my_settings">
+                    {/* меню бургер */}
+                    <Box display={{xs: "block", lg: "none"}}>
+                        <Tooltip title="список страниц">
                             <IconButton onClick={handleOpenSettingsMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                                <MenuIcon color={"secondary"}/>
                             </IconButton>
                         </Tooltip>
+
                         <Menu
                             sx={{mt: '55px'}}
                             id="menu-appbar"
@@ -85,12 +55,61 @@ const Header = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseSettingsMenu}
                         >
-                            {mySettings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseSettingsMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            {pages.map((page, index) => (
+                                <MenuItem
+                                    onClick={handleCloseSettingsMenu}
+                                    key={page.name as Key}
+                                    component={Link} to={page.link}
+                                >
+                                    <Typography textAlign="center">{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
+
+                    </Box>
+
+                    {/* Имя приложения */}
+                    <Box>
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component={Link}
+                            to={"/"}
+                            sx={{
+                                mr: 2,
+                                fontWeight: 200,
+                                fontFamily: 'roboto',
+                                color: 'white',
+                                letterSpacing: '.2rem',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            Educative
+                        </Typography>
+                    </Box>
+
+                    {/* обычное меню */}
+                    <Box sx={{flexWrap: {xs: 'nowrap', md: 'wrap'}, flexGrow: {xs: 0, md: 1}}}
+                         display={{xs: "none", lg: "flex"}}
+                    >
+                        {pages.map((page) => (
+                            <Button
+                                key={page.name as Key}
+                                component={Link} to={page.link}
+                                sx={{my: 2, color: 'white', display: 'block', textDecoration: "none"}}
+                            >
+                                {page.name}
+                            </Button>
+                        ))}
+                    </Box>
+
+                    <Box sx={{flexGrow: 0}}>
+
+                        <Tooltip title="Твоя фотка красавчик!">
+                            <IconButton sx={{p: 0}}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 </Toolbar>
             </AppBar>
