@@ -33,10 +33,19 @@
 [:arrow_up:Оглавление](#Оглавление)
 
 ## Архитектура
-    python 3.10
-    backend - django rest framework
-    forntend - react.js
-    database - sqlite3/ or PostgeSQL
+    backend
+    - python 3.10
+    - django 4.1
+    - django rest framework 3.1.0
+
+    forntend
+    - node v16.17.0
+    - npm 8.15.0
+    - react 18
+    - material 5.14
+
+    database
+    - sqlite3/ or PostgeSQL
 
 [:arrow_up:Оглавление](#Оглавление)
 
