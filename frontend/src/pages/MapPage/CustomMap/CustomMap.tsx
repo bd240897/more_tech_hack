@@ -1,7 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
 import atms from "@/data/atms_fixed.json"
 import offices from "@/data/offices_fixed.json"
+import {getAtms, getOffices} from "@/api/api";
 
 const config = {
     moscowCoordinates: [
@@ -55,8 +56,8 @@ const prepareAtmsPointData = (atms) => {
     return points
 }
 
-const pointsAtms = prepareAtmsPointData(atms)
-const pointsOffices = prepareOfficesPointData(offices)
+// const pointsAtms = prepareAtmsPointData(atms)
+// const pointsOffices = prepareOfficesPointData(offices)
 
 
 
@@ -71,6 +72,32 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
 
     console.log("CustomMap| isAtms", isAtms)
     console.log("CustomMap| isAtms", isOffices)
+
+
+    const [pointsAtms, setPointsAtms] = useState([])
+    const [pointsOffices, setPointsOffices] = useState([])
+
+    /**
+     * Грузит данные при открытии страницы
+     */
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    /**
+     * Грузим данные из апи
+     */
+    const fetchData = async () => {
+        const dataAtms = await getAtms()
+        const dataOffices = await getOffices()
+        // Promise.all(getAtms(), getOffices())
+        if (dataAtms && dataAtms !== null) setPointsAtms(prepareAtmsPointData(dataAtms))
+        if (dataOffices && dataOffices !== null) setPointsOffices(prepareOfficesPointData(dataOffices))
+        console.log("dataAtms", dataAtms)
+        console.log("dataOffices", dataOffices)
+    }
+
+
 
     /**
      * Ищет данные локации по id и тригерит модальное окно

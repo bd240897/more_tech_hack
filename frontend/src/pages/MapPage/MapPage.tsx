@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
-import {Box, Button, Switch} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import CustomModal from "./CustomModal/CustomModal";
 import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
 import {menuItemsInit} from "@/common/services";
+import {getAtms} from "@/api/api";
 
 const MapPage = () => {
 
@@ -18,6 +19,25 @@ const MapPage = () => {
     const [isDrawer, setIsDrawer] = React.useState(false);
     // параметры меню выбраннные (там вкл банкоматы)
     const [menuParams, setMenuParams] = React.useState(menuItemsInit);
+
+    // /**
+    //  *
+    //  */
+    // useEffect(() => {
+    //
+    // }, []);
+
+
+    // /**
+    //  * Обрабатывает данные для img tag
+    //  */
+    // const prepareData = (data): string => {
+    //     if (streamUrl !== null && "stream" in streamUrl) {
+    //         return streamUrl.stream
+    //     }
+    //     return ""
+    // }
+
 
     return (
         <>
