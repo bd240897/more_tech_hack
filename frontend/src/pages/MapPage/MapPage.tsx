@@ -1,35 +1,20 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import {Box, Button} from "@mui/material";
+import {Box, Button, Switch} from "@mui/material";
 import CustomModal from "./CustomModal/CustomModal";
 import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
 
 const MapPage = () => {
 
-    // модалка
-    const [openModal, setOpenModal] = React.useState(false);
+    // модалка открыта ли
+    const [isModal, setIsModal] = React.useState(false);
+    // банкоматы показаны ли
+    const [isAtms, setIsAtms] = React.useState(true);
+    // текущие данные для модалки
     const [modalData, setModalData] = React.useState({});
-
-    // Drawer
-    const [openDrawer, setOpenDrawer] = React.useState(false);
-
-    interface ModalProps {
-        id: string
-        address: string
-        allDay: boolean
-        latitude: string
-        longitude: string
-        services: []
-    }
-
-    // TODO realise
-    // const checkDataModel = (data): ModalProps => {
-    //     const resData = data.slice()
-    //     if (resData && "allDay" in modalData){
-    //
-    //     }
-    // }
+    // нижнее меню открыто ли
+    const [isDrawer, setIsDrawer] = React.useState(false);
 
     return (
         <>
@@ -42,10 +27,9 @@ const MapPage = () => {
                 }}
                 >
                     <CustomMap
-                        modalData={modalData}
                         setModalData={setModalData}
-                        openModal={openModal}
-                        setOpenModal={setOpenModal}
+                        setIsModal={setIsModal}
+                        isAtms={isAtms}
                     />
                 </Box>
 
@@ -55,10 +39,10 @@ const MapPage = () => {
                     <Button fullWidth
                             variant="contained"
                             id="basic-button"
-                            aria-controls={openDrawer ? 'basic-menu' : undefined}
+                            aria-controls={isDrawer ? 'basic-menu' : undefined}
                             aria-haspopup="true"
-                            aria-expanded={openDrawer ? 'true' : undefined}
-                            onClick={()=>setOpenDrawer(true)}
+                            aria-expanded={isDrawer ? 'true' : undefined}
+                            onClick={()=>setIsDrawer(true)}
                     >
                         Выбор услуги
                     </Button>
@@ -67,8 +51,8 @@ const MapPage = () => {
                     {/* ####### MODAL ######## */}
 
                     <CustomModal
-                        open={openModal}
-                        handleClose={() => setOpenModal(false)}
+                        isModal={isModal}
+                        handleClose={() => setIsModal(false)}
                         address={(modalData && "address" in modalData) ? modalData.address : "empty"}
                         id={(modalData && "id" in modalData) ? modalData.id : "empty"}
                         allDay={(modalData && "allDay" in modalData) ? modalData.allDay : "empty"}
@@ -81,11 +65,13 @@ const MapPage = () => {
                     {/* ####### DRAWER ######## */}
 
                     <CustomDrawer
-                        state={openDrawer}
-                        setState={setOpenDrawer}
+                        isDrawer={isDrawer}
+                        setIsDrawer={setIsDrawer}
                     >
                     </CustomDrawer>
 
+
+                    <Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>
                 </Box>
             </Container>
         </>

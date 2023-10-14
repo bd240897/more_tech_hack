@@ -16,7 +16,7 @@ const style = {
 };
 
 interface ModalProps {
-    open: boolean
+    isModal: boolean
     handleClose: () => void
     id: string
     address: string
@@ -26,19 +26,15 @@ interface ModalProps {
     services: object
 }
 
-
-
-
-
 export default function CustomModal({
-                                        open,
+                                        isModal,
                                         handleClose,
-                                        id="не известен",
-                                        address="не известен",
-                                        allDay=false,
-                                        latitude="не известен",
-                                        longitude="не известен",
-                                        services= {},
+                                        id = "не известен",
+                                        address = "не известен",
+                                        allDay = false,
+                                        latitude = "не известен",
+                                        longitude = "не известен",
+                                        services = {},
                                     }: ModalProps) {
 
     const makeServices = (data: object) => {
@@ -79,10 +75,10 @@ export default function CustomModal({
             return status
         }
 
-        return(
+        return (
             <>
                 {
-                    serviceNames.map((serviceName)=>{
+                    serviceNames.map((serviceName) => {
 
                         const serviceParams = data[serviceName]
 
@@ -97,7 +93,7 @@ export default function CustomModal({
     return (
         <div>
             <Modal
-                open={open}
+                open={isModal}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

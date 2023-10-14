@@ -1,7 +1,7 @@
 import React from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
 import atms from "@/data/atms_fixed.json"
-import offices from "@/data/offices.json"
+import offices from "@/data/offices_fixed.json"
 
 const config = {
     moscowCoordinates: [
@@ -11,13 +11,13 @@ const config = {
     key: "4b243459-9b51-4a12-a835-86fb809f0263"
 }
 
-
+/**
+ * Обрабатывает данные для офисов
+ */
 const prepareOfficesPointData = (offices) => {
     const points = []
 
-    // TODO ts ignore
-    // @ts-ignore
-    offices.slice().map((el, index) => // 0, 5
+    offices.slice().map((el) => // 0, 5
         points.push(
             {
                 id: el.id,
@@ -35,14 +35,12 @@ const prepareOfficesPointData = (offices) => {
 
 /**
  * Обрабатывает данные для банкоматов
- * @param atms
+ * ! создает нвоый массив без префика atms т.е. это лист
  */
 const prepareAtmsPointData = (atms) => {
     const points = []
 
-    // TODO ts ignore
-    // @ts-ignore
-    atms.atms.slice().map((el, index) => // 0, 5
+    atms.atms.slice().map((el) => // 0, 5
         points.push(
             {
                 id: el.id,
@@ -57,31 +55,35 @@ const prepareAtmsPointData = (atms) => {
     return points
 }
 
-const points = prepareAtmsPointData(atms)
+const pointsAtms = prepareAtmsPointData(atms)
 const pointsOffices = prepareOfficesPointData(offices)
 
 
 
 interface CustomMapProps {
-    modalData: any
-    setModalData:  (value: (((prevState: {}) => {}) | {})) => void
-    openModal: boolean
-    setOpenModal:  (value: (((prevState: {}) => {}) | {})) => void
+    setModalData:   (value: (((prevState: object) => object) | object)) => void
+    setIsModal:  (value: (((prevState: boolean) => boolean) | boolean)) => void
+    isAtms: boolean
 }
 
-const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMapProps) => {
+const CustomMap = ({setModalData, setIsModal, isAtms}: CustomMapProps) => {
 
+
+    /**
+     * Ищет данные локации по id и тригерит модальное окно
+     * ! ищем в исходном массиве - нужно atms.atms
+     */
     const handleOpenModalWithData = (data: any) => {
 
         console.log("handleOpenModalWithData", data)
-
         // получим все данные по id
         const foundData = atms.atms.find((el)=>el.id===data.id)
         console.log("foundData", foundData)
 
         if ("id" in data) {
             setModalData(foundData)
-            setOpenModal(true);
+            setIsModal(true);
+            console.log(1111, foundData)
         }
     }
 
@@ -95,7 +97,7 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
     // формируем список точек
     const collection = {
         type: "FeatureCollection",
-        features: points.map((point) => {
+        features: pointsAtms.map((point) => {
             return {
                 id: point.id,
                 type: "Feature",
@@ -120,9 +122,9 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
     // https://ru.stackoverflow.com/questions/868306/Изменение-цвета-маркера
     const collectionOffices = {
         type: "FeatureCollection",
-        features: pointsOffices.map((point, index) => {
+        features: pointsOffices.map((point) => {
             return {
-                id: index,
+                id: point.id,
                 type: "Feature",
                 // тут координаты точки и ее тип
                 geometry: {
@@ -132,7 +134,7 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
                 // тут ставим как выводить карточку -которая всплывает
                 properties: {
                     balloonContent: `<div>${point.title} КАРТОЧКА</div>`,
-                    clusterCaption: `Метка №${index}`,
+                    clusterCaption: `Метка №${point.id}`,
                 },
                 options: {
                     preset: 'islands#greenIcon'
@@ -180,35 +182,37 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
                                 })
                         }}
                     />
+                    {isAtms &&
+                        <ObjectManager
+                            objects={{
+                                openBalloonOnClick: true,
+                                clusterize: true,
+                                gridSize: 32,
+                            }}
+                            clusters={{}}
+                            options={{
+                                clusterize: true,
+                                gridSize: 128,
+                                iconImageSize: [10, 10],
+                                preset: 'islands#invertedGreenClusterIcons'
+                            }}
+                            defaultFeatures={collectionOffices}
+                            modules={[
+                                "objectManager.addon.objectsBalloon",
+                                "objectManager.addon.clustersBalloon"
+                            ]}
+                            // instanceRef={ref => {
+                            //     if (ref && "objects" in ref)
+                            //         ref.objects.events.add('click', (e) => {
+                            //             // Используем айдишник для того, чтобы далее получить инфу по метке
+                            //             const objectId = e.get('objectId');
+                            //             const data = ref.objects.getById(objectId)
+                            //             handleOpenModalWithData(data)
+                            //         })
+                            // }}
+                        />
+                    }
 
-                    <ObjectManager
-                        objects={{
-                            openBalloonOnClick: true,
-                            clusterize: true,
-                            gridSize: 32,
-                        }}
-                        clusters={{}}
-                        options={{
-                            clusterize: true,
-                            gridSize: 128,
-                            iconImageSize: [10, 10],
-                            preset: 'islands#invertedGreenClusterIcons'
-                        }}
-                        defaultFeatures={collectionOffices}
-                        modules={[
-                            "objectManager.addon.objectsBalloon",
-                            "objectManager.addon.clustersBalloon"
-                        ]}
-                        instanceRef={ref => {
-                            if (ref && "objects" in ref)
-                                ref.objects.events.add('click', (e) => {
-                                    // Используем айдишник для того, чтобы далее получить инфу по метке
-                                    const objectId = e.get('objectId');
-                                    const data = ref.objects.getById(objectId)
-                                    handleOpenModalWithData(data)
-                                })
-                        }}
-                    />
                 </Map>
             </YMaps>
 

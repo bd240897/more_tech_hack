@@ -21,11 +21,11 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 
 interface CustomDrawerProps {
-    state: boolean,
-    setState:  (value: (((prevState: boolean) => boolean) | boolean)) => void
+    isDrawer: boolean,
+    setIsDrawer:  (value: (((prevState: boolean) => boolean) | boolean)) => void
 }
 
-export default function CustomDrawer({state=false, setState=()=>{}}: CustomDrawerProps) {
+export default function CustomDrawer({isDrawer=false, setIsDrawer=()=>{}}: CustomDrawerProps) {
 
     // стейт открыт ли или нет
     // const [state, setState] = React.useState(false);
@@ -46,7 +46,7 @@ export default function CustomDrawer({state=false, setState=()=>{}}: CustomDrawe
                 return;
             }
 
-            setState(open);
+            setIsDrawer(open);
         };
 
     /**
@@ -101,7 +101,7 @@ export default function CustomDrawer({state=false, setState=()=>{}}: CustomDrawe
 
                 <Drawer
                     anchor={'bottom'}
-                    open={state}
+                    open={isDrawer}
                     onClose={toggleDrawer(false)}
                 >
                     {list('bottom')}
