@@ -6,6 +6,7 @@ import {Box, Button} from "@mui/material";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CustomModal from "./CustomModal/CustomModal";
+import styles from "./MapPage.module.sass";
 
 const config = {
     moscowCoordinates: [
@@ -147,6 +148,7 @@ const MapYa = () => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}
+                            className={styles.services_btn}
                     >
                         Выбор услуги
                     </Button>
@@ -159,6 +161,8 @@ const MapYa = () => {
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}
+                        className={styles.services_btn}
+
                     >
                         <MenuItem onClick={handleClose}>Кредит</MenuItem>
                         <MenuItem onClick={handleClose}>Депозит</MenuItem>
