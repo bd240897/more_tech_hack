@@ -1,0 +1,21 @@
+{
+  "office_id": 10000,
+  "type": "office",
+  "services": [
+    {
+      "service_id": 1,
+      "name": "Ипотечное кредитование",
+      "queue": 15
+    },
+    {
+      "service_id": 2,
+      "name": "Автокредит",
+      "queue": 5
+    },
+    {
+      "service_id": 3,
+      "name": "Банковские карты",
+      "queue": 0
+    }
+  ]
+}
