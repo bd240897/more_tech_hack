@@ -5,26 +5,17 @@ import styles from './ListPaymentsPage.module.sass';
 import {
     Box,
     Drawer,
-    Button,
     List,
     Divider,
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText, ToggleButton,
+    ListItemText, ToggleButton, Button,
 } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import {services, servicesFromData} from "@/common/services";
+import {menuItems, servicesFromData} from "@/common/services";
 import {styled} from "@mui/material/styles";
-
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
-
-
-interface CustomDrawerProps {
-    isDrawer: boolean,
-    setIsDrawer: (value: (((prevState: boolean) => boolean) | boolean)) => void
-}
 
 const CustomToggleButton = styled(ToggleButton)({
     backgroundColor: 'white',
@@ -38,9 +29,27 @@ const CustomToggleButton = styled(ToggleButton)({
     }
 });
 
-export default function CustomDrawer({isDrawer = false, setIsDrawer = () => {}}: CustomDrawerProps) {
+interface menuParamsType {
+    [p: string]: boolean
+}
 
-    const [isToggleButton, setIsToggleButton] = React.useState(false);
+interface CustomDrawerProps {
+    isDrawer: boolean,
+    setIsDrawer: (value: (((prevState: boolean) => boolean) | boolean)) => void
+    menuParams: menuParamsType
+    setMenuParams: (value: (((prevState: menuParamsType) => menuParamsType) | menuParamsType)) => void
+}
+
+export default function CustomDrawer({
+                                         isDrawer = false,
+                                         setIsDrawer = () => {
+                                         },
+                                         menuParams = {offices: false},
+                                         setMenuParams = () => {
+                                         }
+                                     }: CustomDrawerProps) {
+    //
+    // const [menuParams, setMenuParams] = React.useState({offices: false});
 
     /**
      * Переключает вкл и выкл меню
@@ -63,7 +72,7 @@ export default function CustomDrawer({isDrawer = false, setIsDrawer = () => {}}:
     /**
      * Тут чисто список
      */
-    const list = (anchor: Anchor) => (
+    const list = (anchor) => (
         <Box
             sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
             role="presentation"
@@ -73,47 +82,42 @@ export default function CustomDrawer({isDrawer = false, setIsDrawer = () => {}}:
 
             {/* сам список ссылоок */}
             <List>
-                {servicesFromData.map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
+                {menuItems.map((element) => (
+                    <ListItem key={element.id} disablePadding sx={{mb: 1}}>
+                        <CustomToggleButton
+                            value="check"
+                            aria-label="left aligned"
+                            selected={menuParams[element.name]}
+                            key={element.id}
+                            onChange={(e) => {
+                                setMenuParams(prev => {
+                                    return {...prev, [e.target.name]: !prev[e.target.name]}
+                                });
+                                console.log()
+                            }}
+                            name={element.name}
+                            fullWidth
+                            sx={{mx: 2}}
+                        >
+                            {element.text}
+                        </CustomToggleButton>
                     </ListItem>
                 ))}
-            </List>
-
-            <Divider/>
-
-            {/* сам список ссылоок */}
-            <List>
-                {services.map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-                {/* TODO make buttons */}
-                <ListItem key={111111} disablePadding>
-                    <CustomToggleButton
+                <ListItem disablePadding sx={{mb: 1}}>
+                    <Button
                         value="check"
                         aria-label="left aligned"
-                        selected={isToggleButton}
-                        onChange={() => {
-                            setIsToggleButton(!isToggleButton);
+                        onClick={()=>{
+                            console.log("click")
+                            setIsDrawer(false)
                         }}
+                        name={"next"}
                         fullWidth
-                        sx={{mx: 2}}
+                        sx={{mx: 2, backgroundColor: "secondary.main"}}
+                        variant={"contained"}
                     >
-                            2222222
-
-                    </CustomToggleButton>
+                        Далее
+                    </Button>
                 </ListItem>
             </List>
 

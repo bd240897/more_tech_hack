@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
 import atms from "@/data/atms_fixed.json"
 import offices from "@/data/offices_fixed.json"
@@ -64,10 +64,13 @@ interface CustomMapProps {
     setModalData:   (value: (((prevState: object) => object) | object)) => void
     setIsModal:  (value: (((prevState: boolean) => boolean) | boolean)) => void
     isAtms: boolean
+    isOffices: boolean
 }
 
-const CustomMap = ({setModalData, setIsModal, isAtms}: CustomMapProps) => {
+const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps) => {
 
+    console.log("CustomMap| isAtms", isAtms)
+    console.log("CustomMap| isAtms", isOffices)
 
     /**
      * Ищет данные локации по id и тригерит модальное окно
@@ -156,33 +159,36 @@ const CustomMap = ({setModalData, setIsModal, isAtms}: CustomMapProps) => {
                      height="100vh"
                      state={mapState}
                 >
-                    <ObjectManager
-                        objects={{
-                            openBalloonOnClick: true,
-                            clusterize: true,
-                            gridSize: 32,
-                        }}
-                        clusters={{}}
-                        options={{
-                            clusterize: true,
-                            gridSize: 128
-                        }}
-                        defaultFeatures={collection}
-                        modules={[
-                            "objectManager.addon.objectsBalloon",
-                            "objectManager.addon.clustersBalloon"
-                        ]}
-                        instanceRef={ref => {
-                            if (ref && "objects" in ref)
-                                ref.objects.events.add('click', (e) => {
-                                    // Используем айдишник для того, чтобы далее получить инфу по метке
-                                    const objectId = e.get('objectId');
-                                    const data = ref.objects.getById(objectId)
-                                    handleOpenModalWithData(data)
-                                })
-                        }}
-                    />
                     {isAtms &&
+                        <ObjectManager
+                            objects={{
+                                openBalloonOnClick: true,
+                                clusterize: true,
+                                gridSize: 32,
+                            }}
+                            clusters={{}}
+                            options={{
+                                clusterize: true,
+                                gridSize: 128
+                            }}
+                            defaultFeatures={collection}
+                            modules={[
+                                "objectManager.addon.objectsBalloon",
+                                "objectManager.addon.clustersBalloon"
+                            ]}
+                            instanceRef={ref => {
+                                if (ref && "objects" in ref)
+                                    ref.objects.events.add('click', (e) => {
+                                        // Используем айдишник для того, чтобы далее получить инфу по метке
+                                        const objectId = e.get('objectId');
+                                        const data = ref.objects.getById(objectId)
+                                        handleOpenModalWithData(data)
+                                    })
+                            }}
+                        />
+                    }
+
+                    {isOffices &&
                         <ObjectManager
                             objects={{
                                 openBalloonOnClick: true,

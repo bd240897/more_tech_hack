@@ -19,3 +19,50 @@ export const pages = [{name: 'Login', link: "/"},
     {name: 'Map', link: "/map"},
     {name: 'About', link: "/about"},
     {name: 'Test', link: "/test"},];
+
+
+const menuItem = {
+    id: 1,
+    name: "offices",
+    text: "Показывать офисы"
+}
+
+export const menuItems = [
+    {
+        id: 1,
+        name: "offices",
+        text: "Показывать офисы"
+    },
+    {
+        id: 2,
+        name: "atms",
+        text: "Показывать банкоматы"
+    },
+    {
+        id: 3,
+        name: "credits",
+        text: "Кредиты"
+    },
+    {
+        id: 4,
+        name: "deposits",
+        text: "Депозиты"
+    },
+    {
+        id: 5,
+        name: "mortgage",
+        text: "Ипотека"
+    },
+]
+
+const menuItemsInit = menuItems.reduce(function (result, element) {
+    return {
+        ...result,
+        [element.name]: false,
+    }
+}, {})
+
+menuItemsInit.offices = true;
+menuItemsInit.atms = true;
+
+export {menuItemsInit}

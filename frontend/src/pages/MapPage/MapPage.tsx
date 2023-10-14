@@ -4,17 +4,20 @@ import {Box, Button, Switch} from "@mui/material";
 import CustomModal from "./CustomModal/CustomModal";
 import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
+import {menuItemsInit} from "@/common/services";
 
 const MapPage = () => {
 
     // модалка открыта ли
     const [isModal, setIsModal] = React.useState(false);
     // банкоматы показаны ли
-    const [isAtms, setIsAtms] = React.useState(true);
+    // const [isAtms, setIsAtms] = React.useState(true);
     // текущие данные для модалки
     const [modalData, setModalData] = React.useState({});
     // нижнее меню открыто ли
     const [isDrawer, setIsDrawer] = React.useState(false);
+    // параметры меню выбраннные (там вкл банкоматы)
+    const [menuParams, setMenuParams] = React.useState(menuItemsInit);
 
     return (
         <>
@@ -29,7 +32,8 @@ const MapPage = () => {
                     <CustomMap
                         setModalData={setModalData}
                         setIsModal={setIsModal}
-                        isAtms={isAtms}
+                        isOffices={menuParams.offices}
+                        isAtms={menuParams.atms}
                     />
                 </Box>
 
@@ -67,11 +71,13 @@ const MapPage = () => {
                     <CustomDrawer
                         isDrawer={isDrawer}
                         setIsDrawer={setIsDrawer}
+                        menuParams={menuParams}
+                        setMenuParams={setMenuParams}
                     >
                     </CustomDrawer>
 
 
-                    <Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>
+                    {/*<Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>*/}
                 </Box>
             </Container>
         </>
