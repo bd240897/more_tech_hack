@@ -1,6 +1,6 @@
 import React from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
-import atms from "@/data/atms.json"
+import atms from "@/data/atms_fixed.json"
 import {Box} from "@mui/material";
 
 const config = {
@@ -18,15 +18,15 @@ const points = []
 atms.atms.slice().map((el, index) => // 0, 5
     points.push(
         {
-            id: String(index),
+            id: el.id,
             coordinates: [el.latitude, el.longitude],
             title: el.address
         }
     )
 )
 
-console.log(atms.atms.slice(0, 5))
-console.log(points)
+console.log("sourcedPoints", atms.atms.slice(0, 5))
+console.log("preparedPoints", points.slice(0, 5))
 
 interface CustomMapProps {
     modalData: any
@@ -38,8 +38,15 @@ interface CustomMapProps {
 const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMapProps) => {
 
     const handleOpenModalWithData = (data: any) => {
+
+        console.log("handleOpenModalWithData", data)
+
+        // получим все данные по id
+        const foundData = atms.atms.find((el)=>el.id===data.id)
+        console.log("foundData", foundData)
+
         if ("id" in data) {
-            setModalData({id: data.id, address: "TODO"})
+            setModalData(foundData)
             setOpenModal(true);
         }
     }
@@ -54,9 +61,9 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
     // формируем список точек
     const collection = {
         type: "FeatureCollection",
-        features: points.map((point, id) => {
+        features: points.map((point) => {
             return {
-                id: id,
+                id: point.id,
                 type: "Feature",
                 // тут координаты точки и ее тип
                 geometry: {
@@ -66,7 +73,7 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
                 // тут ставим как выводить карточку -которая всплывает
                 properties: {
                     balloonContent: `<div>${point.title} КАРТОЧКА</div>`,
-                    clusterCaption: `Метка №${id + 1}`
+                    clusterCaption: `Метка №${point.id}`
                 }
             };
         })
@@ -109,7 +116,6 @@ const CustomMap = ({modalData, setModalData, openModal, setOpenModal}: CustomMap
                                     const objectId = e.get('objectId');
                                     const data = ref.objects.getById(objectId)
                                     handleOpenModalWithData(data)
-                                    console.log(data)
                                 })
                         }}
                     />

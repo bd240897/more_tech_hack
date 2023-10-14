@@ -14,6 +14,23 @@ const MapPage = () => {
     // Drawer
     const [openDrawer, setOpenDrawer] = React.useState(false);
 
+    interface ModalProps {
+        id: string
+        address: string
+        allDay: boolean
+        latitude: string
+        longitude: string
+        services: []
+    }
+
+    // TODO realise
+    // const checkDataModel = (data): ModalProps => {
+    //     const resData = data.slice()
+    //     if (resData && "allDay" in modalData){
+    //
+    //     }
+    // }
+
     return (
         <>
             <Container>
@@ -51,10 +68,13 @@ const MapPage = () => {
 
                     <CustomModal
                         open={openModal}
-                        handleOpen={() => setOpenModal(true)}
                         handleClose={() => setOpenModal(false)}
                         address={(modalData && "address" in modalData) ? modalData.address : "empty"}
                         id={(modalData && "id" in modalData) ? modalData.id : "empty"}
+                        allDay={(modalData && "allDay" in modalData) ? modalData.allDay : "empty"}
+                        latitude={(modalData && "latitude" in modalData) ? modalData.latitude : "empty"}
+                        longitude={(modalData && "longitude" in modalData) ? modalData.longitude : "empty"}
+                        services={(modalData && "services" in modalData) ? modalData.services : []}
                     >
                     </CustomModal>
 
