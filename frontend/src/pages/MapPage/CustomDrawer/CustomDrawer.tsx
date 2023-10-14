@@ -6,15 +6,11 @@ import {
     Box,
     Drawer,
     List,
-    Divider,
     ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText, ToggleButton, Button,
+    ToggleButton,
+    Button,
 } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import {menuItems, servicesFromData} from "@/common/services";
+import {menuItems} from "@/common/services";
 import {styled} from "@mui/material/styles";
 
 const CustomToggleButton = styled(ToggleButton)({

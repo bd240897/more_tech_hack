@@ -6,6 +6,7 @@ import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
 import {menuItemsInit} from "@/common/services";
 import {getAtms} from "@/api/api";
+import TrafficWindow from "@/pages/MapPage/TrafficWindow/TrafficWindow";
 
 const MapPage = () => {
 
@@ -96,7 +97,7 @@ const MapPage = () => {
                     >
                     </CustomDrawer>
 
-
+                    <TrafficWindow/>
                     {/*<Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>*/}
                 </Box>
             </Container>
