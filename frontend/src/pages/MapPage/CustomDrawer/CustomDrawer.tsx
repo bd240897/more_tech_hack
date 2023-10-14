@@ -34,15 +34,16 @@ interface CustomDrawerProps {
     setIsDrawer: (value: (((prevState: boolean) => boolean) | boolean)) => void
     menuParams: menuParamsType
     setMenuParams: (value: (((prevState: menuParamsType) => menuParamsType) | menuParamsType)) => void
+    setIsTraffic: (value: (((prevState: boolean) => boolean) | boolean)) => void
+
 }
 
-export default function CustomDrawer({
-                                         isDrawer = false,
-                                         setIsDrawer = () => {
-                                         },
+
+export default function CustomDrawer({isDrawer = false,
+                                         setIsDrawer = () => {},
                                          menuParams = {offices: false},
-                                         setMenuParams = () => {
-                                         }
+                                         setMenuParams = () => {},
+                                         setIsTraffic = () => {}
                                      }: CustomDrawerProps) {
     //
     // const [menuParams, setMenuParams] = React.useState({offices: false});
@@ -106,6 +107,7 @@ export default function CustomDrawer({
                         onClick={()=>{
                             console.log("click")
                             setIsDrawer(false)
+                            setIsTraffic(true)
                         }}
                         name={"next"}
                         fullWidth

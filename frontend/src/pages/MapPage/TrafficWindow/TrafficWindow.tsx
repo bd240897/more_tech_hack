@@ -24,9 +24,13 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const TrafficWindow = () => {
+interface TrafficWindow{
+    setIsTraffic: (value: (((prevState: boolean) => boolean) | boolean)) => void
+}
+
+const TrafficWindow = ({setIsTraffic}: TrafficWindow) => {
     return (
-        <div>
+        <Box sx={{my: 3}}>
             <Box sx={{mb: 2}}>
                 <Typography variant={'h3'} align={"center"}>
                     Банк ВТБ
@@ -114,7 +118,7 @@ const TrafficWindow = () => {
             </Box>
 
 
-            <Box sx={{backgroundColor: "#DCE0EB", borderRadius: "10px", p: 2}}>
+            <Box sx={{backgroundColor: "#DCE0EB", borderRadius: "10px",mb: 2, p: 2}}>
                 <Stack direction="row" justifyContent="center" alignItems="center" sx={{px: 5}} gap={2}>
                     <PhoneEnabledIcon sx={{fontSize: "50px"}}/>
                     <Stack direction="column">
@@ -127,7 +131,16 @@ const TrafficWindow = () => {
                     </Stack>
                 </Stack>
             </Box>
-        </div>
+
+            <Button fullWidth
+                    variant="contained"
+                    id="basic-button"
+                    onClick={()=>setIsTraffic(false)}
+                    sx={{backgroundColor: "secondary.main"}}
+            >
+                Закрыть
+            </Button>
+        </Box>
     );
 };
 

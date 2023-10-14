@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
-import {Box, Button} from "@mui/material";
+import {Box, Button, Drawer} from "@mui/material";
 import CustomModal from "./CustomModal/CustomModal";
 import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
@@ -12,33 +12,14 @@ const MapPage = () => {
 
     // модалка открыта ли
     const [isModal, setIsModal] = React.useState(false);
-    // банкоматы показаны ли
-    // const [isAtms, setIsAtms] = React.useState(true);
     // текущие данные для модалки
     const [modalData, setModalData] = React.useState({});
     // нижнее меню открыто ли
     const [isDrawer, setIsDrawer] = React.useState(false);
     // параметры меню выбраннные (там вкл банкоматы)
     const [menuParams, setMenuParams] = React.useState(menuItemsInit);
-
-    // /**
-    //  *
-    //  */
-    // useEffect(() => {
-    //
-    // }, []);
-
-
-    // /**
-    //  * Обрабатывает данные для img tag
-    //  */
-    // const prepareData = (data): string => {
-    //     if (streamUrl !== null && "stream" in streamUrl) {
-    //         return streamUrl.stream
-    //     }
-    //     return ""
-    // }
-
+    // открыта ли страница трафика
+    const [isTraffic, setIsTraffic] = React.useState(false);
 
     return (
         <>
@@ -94,10 +75,23 @@ const MapPage = () => {
                         setIsDrawer={setIsDrawer}
                         menuParams={menuParams}
                         setMenuParams={setMenuParams}
+                        setIsTraffic={setIsTraffic}
                     >
                     </CustomDrawer>
 
-                    <TrafficWindow/>
+
+
+                    <Drawer
+                        anchor={'bottom'}
+                        open={isTraffic}
+                        // onClose={()=>{}}
+                        // onClick={event=>event.stopPropagation()}
+                    >
+                        <Container>
+                            <TrafficWindow setIsTraffic={setIsTraffic}/>
+                        </Container>
+                    </Drawer>
+
                     {/*<Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>*/}
                 </Box>
             </Container>
