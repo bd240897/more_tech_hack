@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Container from "@mui/material/Container";
 import {Box, Button, Drawer} from "@mui/material";
 import CustomModal from "./CustomModal/CustomModal";
 import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 import CustomMap from "@/pages/MapPage/CustomMap/CustomMap";
 import {menuItemsInit} from "@/common/services";
-import {getAtms} from "@/api/api";
 import TrafficWindow from "@/pages/MapPage/TrafficWindow/TrafficWindow";
 
 const MapPage = () => {
@@ -27,7 +26,7 @@ const MapPage = () => {
                 <Box sx={{
                     mb: 2,
                     border: "2px solid black",
-                    padding: "15px",
+                    padding: "0px",
                     mt: 2,
                 }}
                 >
@@ -40,6 +39,7 @@ const MapPage = () => {
                 </Box>
 
                 <Box sx={{mb: 2}}>
+
                     {/* ####### Кнопка открытия меню ######## */}
 
                     <Button fullWidth
@@ -49,6 +49,7 @@ const MapPage = () => {
                             aria-haspopup="true"
                             aria-expanded={isDrawer ? 'true' : undefined}
                             onClick={()=>setIsDrawer(true)}
+                            sx={{backgroundColor: "secondary.main"}}
                     >
                         Выбор услуги
                     </Button>
@@ -84,15 +85,12 @@ const MapPage = () => {
                     <Drawer
                         anchor={'bottom'}
                         open={isTraffic}
-                        // onClose={()=>{}}
-                        // onClick={event=>event.stopPropagation()}
                     >
                         <Container>
                             <TrafficWindow setIsTraffic={setIsTraffic}/>
                         </Container>
                     </Drawer>
 
-                    {/*<Switch defaultChecked onClick={(event)=>setIsAtms(event.target.checked)}/>*/}
                 </Box>
             </Container>
         </>

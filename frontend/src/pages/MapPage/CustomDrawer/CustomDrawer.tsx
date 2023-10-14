@@ -1,7 +1,6 @@
 import * as React from 'react';
 //style
 import styles from './ListPaymentsPage.module.sass';
-
 import {
     Box,
     Drawer,
@@ -125,14 +124,10 @@ export default function CustomDrawer({isDrawer = false,
     return (
         <div>
             <>
-
-                {/*<Button onClick={toggleDrawer(true)}>Кнопка</Button>*/}
-
                 <Drawer
                     anchor={'bottom'}
                     open={isDrawer}
                     onClose={toggleDrawer(false)}
-                    // onClick={event=>event.stopPropagation()}
                 >
                     {list('bottom')}
                 </Drawer>

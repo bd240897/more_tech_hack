@@ -2,10 +2,6 @@ import React from 'react';
 
 import {
     Box,
-    Drawer,
-    List,
-    ListItem,
-    ToggleButton,
     Button,
     Typography,
     Stack,
@@ -28,7 +24,15 @@ interface TrafficWindow{
     setIsTraffic: (value: (((prevState: boolean) => boolean) | boolean)) => void
 }
 
+
+const trafficColorsNormal = ["green", "green", "gray", "gray", "gray"]
+const trafficColorsHard = ["yellow", "yellow", "yellow", "gray", "gray"]
+
 const TrafficWindow = ({setIsTraffic}: TrafficWindow) => {
+    // модалка открыта ли
+    const [isButtonNow, setIsButtonNow] = React.useState(true);
+
+
     return (
         <Box sx={{my: 3}}>
             <Box sx={{mb: 2}}>
@@ -47,13 +51,25 @@ const TrafficWindow = ({setIsTraffic}: TrafficWindow) => {
             <Box sx={{backgroundColor: "#DCE0EB", borderRadius: "10px", p: 2, mb: 2}}>
 
                 <Stack direction="row" justifyContent="space-between" sx={{mb: 2}} alignItems={"center"}>
-                    <Typography>
+                    <Typography sx={{fontSize: {xs: 12, sm: 15}}}>
                         Загруженность
                     </Typography>
-                    <Button variant={"contained"}>
+                    <Button variant={"contained"}
+                            sx={{fontSize: {xs: 10, sm: 15},
+                            backgroundColor: "secondary.main"
+                            }}
+                            onClick={()=>setIsButtonNow(true)}
+                            disabled={isButtonNow}
+                    >
                         Сейчас
                     </Button>
-                    <Button variant={"contained"}>
+                    <Button variant={"contained"}
+                            sx={{fontSize: {xs: 10, sm: 15},
+                            backgroundColor: "secondary.main"
+                            }}
+                            onClick={()=>setIsButtonNow(false)}
+                            disabled={!isButtonNow}
+                    >
                         Через час
                     </Button>
                 </Stack>
@@ -64,13 +80,19 @@ const TrafficWindow = ({setIsTraffic}: TrafficWindow) => {
                            spacing={2}
                            sx={{mb: 2}}
                     >
-                        <CircleIcon fontSize={"large"} style={{ color: 'green' }}/>
-                        <CircleIcon fontSize={"large"} style={{ color: 'green' }}/>
-                        <CircleIcon fontSize={"large"} style={{ color: 'gray' }}/>
-                        <CircleIcon fontSize={"large"} style={{ color: 'gray' }}/>
-                        <CircleIcon fontSize={"large"} style={{ color: 'gray' }}/>
+                        {isButtonNow
+                            ?
+                            trafficColorsNormal.map((element)=>
+                                <CircleIcon fontSize={"large"} style={{ color: element, fontSize: "40px"}}/>
+                            )
+                            :
+                            trafficColorsHard.map((element)=>
+                                <CircleIcon fontSize={"large"} style={{ color: element, fontSize: "40px"}}/>
+                            )
+                        }
                     </Stack>
                 </Box>
+
 
                 <Stack direction="row" justifyContent="space-between">
                     <Typography variant={"subtitle2"} color={"gray"}>
@@ -122,10 +144,10 @@ const TrafficWindow = ({setIsTraffic}: TrafficWindow) => {
                 <Stack direction="row" justifyContent="center" alignItems="center" sx={{px: 5}} gap={2}>
                     <PhoneEnabledIcon sx={{fontSize: "50px"}}/>
                     <Stack direction="column">
-                        <Typography variant={"h5"}>
+                        <Typography variant={"h5"} sx={{fontSize: {xs: 16, sm: 28}}}>
                             8-800-100-24-24
                         </Typography>
-                        <Typography variant={"subtitle2"}>
+                        <Typography variant={"subtitle2"} sx={{fontSize: {xs: 12, sm: 20}}}>
                             единая справочная
                         </Typography>
                     </Stack>

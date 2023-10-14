@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
-import atms from "@/data/atms_fixed.json"
-import offices from "@/data/offices_fixed.json"
 import {getAtms, getOffices} from "@/api/api";
 
 const config = {
@@ -181,7 +179,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                 }}>
 
                 <Map width="100%"
-                     height="100vh"
+                     height="75vh"
                      state={mapState}
                 >
                     {(isAtms & Boolean(pointsAtms.length)) &&
@@ -194,7 +192,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                             clusters={{}}
                             options={{
                                 clusterize: true,
-                                gridSize: 128
+                                gridSize: 64
                             }}
                             defaultFeatures={collection}
                             modules={[
