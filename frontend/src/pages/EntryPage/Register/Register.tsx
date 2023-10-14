@@ -59,8 +59,8 @@ const Register = ({setTabLogin}:RegisterPageProps) => {
     console.log("errors", errors)
 
     const handleSubmitForm = (data: any) => {
-        console.log("data", data)
-        navigate('/')
+        console.log("handleSubmitForm Register", data)
+        navigate('/map')
     }
 
 
