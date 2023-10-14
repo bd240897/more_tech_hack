@@ -6,6 +6,7 @@ import {Box, Button} from "@mui/material";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CustomModal from "./CustomModal/CustomModal";
+import CustomDrawer from "@/pages/MapPage/CustomDrawer/CustomDrawer";
 
 const config = {
     moscowCoordinates: [
@@ -46,6 +47,9 @@ const MapYa = () => {
             setOpenModal(true);
         }
     }
+
+    // Drawer
+    const [openDrawer, setOpenDrawer] = React.useState(false);
 
     // фишки для меню
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -146,7 +150,7 @@ const MapYa = () => {
                             aria-controls={open ? 'basic-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
-                            onClick={handleClick}
+                            onClick={()=>setOpenDrawer(true)}
                     >
                         Выбор услуги
                     </Button>
@@ -165,6 +169,7 @@ const MapYa = () => {
                         <MenuItem onClick={handleClose}>Что то еще</MenuItem>
                     </Menu>
 
+                    {/* ####### MODAL ######## */}
                     {/* TOTO de;ete open modal*/}
                     {/*<Button onClick={handleOpenModal}>Open modal</Button>*/}
                     <CustomModal
@@ -175,6 +180,14 @@ const MapYa = () => {
                         id={(modalData && "id" in modalData) ? modalData.id : "empty"}
                     >
                     </CustomModal>
+
+                    {/* ####### DRAWER ######## */}
+                    <CustomDrawer
+                        state={openDrawer}
+                        setState={setOpenDrawer}
+                    >
+                    </CustomDrawer>
+
                 </Box>
             </Container>
         </>

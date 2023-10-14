@@ -12,6 +12,7 @@ import MainLayout from "@/layouts/MainLayout/MainLayout";
 import MapPage from "@/pages/MapPage/MapPage";
 import EntryPage from "@/pages/EntryPage/EntryPage";
 import AboutPage from "@/pages/AboutPage/AboutPage";
+import TestPage from "@/pages/TestPage/TestPage";
 
 
 // theme
@@ -78,7 +79,7 @@ const App = () => {
                             <Route index element={<EntryPage/>}/>
                             <Route path="/map" element={<MapPage/>}/>
                             <Route path="/about" element={<AboutPage/>}/>
-                            {/*<Route path="/list" element={<ListPaymentsPage/>}/>*/}
+                            <Route path="/test" element={<TestPage/>}/>
 
                             <Route path="*" element={<NotFoundPage/>}/>
                         </Route>
