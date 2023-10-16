@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import {ReactNode} from "react";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -23,7 +24,8 @@ interface ModalProps {
     allDay: boolean
     latitude: string
     longitude: string
-    services: object
+    services: object | {}
+    children? : ReactNode
 }
 
 export default function CustomModal({
@@ -66,14 +68,13 @@ export default function CustomModal({
 
         const serviceNames = Object.keys(data)
         console.log("serviceNames", serviceNames)
-        // const serviceParams = data[serviceName]
-        // console.log("one service data", serviceParams)
 
         const checkServiceParams = (serviceParams): boolean => {
             const status = serviceParams && "serviceCapability" in serviceParams && "serviceCapability" in serviceParams;
             console.log("checkServiceParams", status)
             return status
         }
+
 
         return (
             <>

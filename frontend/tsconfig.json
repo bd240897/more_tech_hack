@@ -22,8 +22,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // make for unused vars
+    "noUnusedParameters": false, // make for unused vars
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true
   },

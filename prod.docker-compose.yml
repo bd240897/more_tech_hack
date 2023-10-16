@@ -3,11 +3,12 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     volumes:
       - frontend_volume:/app/result_build
     ports:
       - "3000:3000"
+
   backend:
     build:
       context: ./backend/kos_web_ti
@@ -15,6 +16,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
+
   ngixn:
     restart: always
     image: nginx

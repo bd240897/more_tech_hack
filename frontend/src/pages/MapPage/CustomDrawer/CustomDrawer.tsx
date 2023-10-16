@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import {menuItems} from "@/common/services";
 import {styled} from "@mui/material/styles";
+import {ReactNode} from "react";
 
 const CustomToggleButton = styled(ToggleButton)({
     backgroundColor: 'white',
@@ -34,7 +35,7 @@ interface CustomDrawerProps {
     menuParams: menuParamsType
     setMenuParams: (value: (((prevState: menuParamsType) => menuParamsType) | menuParamsType)) => void
     setIsTraffic: (value: (((prevState: boolean) => boolean) | boolean)) => void
-
+    children? : ReactNode
 }
 
 

@@ -50,6 +50,7 @@ export const menuItems = [
     },
 ]
 
+// TODO type
 const menuItemsInit = menuItems.reduce(function (result, element) {
     return {
         ...result,

@@ -127,7 +127,7 @@ const Login = ({setTabRegister}:LoginPageProps) => {
                             {...register('password')}
                         />
 
-                        <Typography variant="p" color="white">
+                        <Typography color="white">
                             {errors.password?.message}
                         </Typography>
                     </Grid>

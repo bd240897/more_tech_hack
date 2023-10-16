@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import {YMaps, Map, ObjectManager} from "@pbe/react-yandex-maps";
 import {getAtms, getOffices} from "@/api/api";
 
@@ -64,6 +64,7 @@ interface CustomMapProps {
     setIsModal:  (value: (((prevState: boolean) => boolean) | boolean)) => void
     isAtms: boolean
     isOffices: boolean
+    children? : ReactNode
 }
 
 const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps) => {
@@ -103,6 +104,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
 
         console.log("handleOpenModalWithData", data)
         // получим все данные по id
+        // TODO it
         const foundData = atms.atms.find((el)=>el.id===data.id)
         console.log("foundData", foundData)
 

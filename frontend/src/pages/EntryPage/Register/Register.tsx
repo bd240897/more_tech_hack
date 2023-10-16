@@ -131,7 +131,7 @@ const Register = ({setTabLogin}:RegisterPageProps) => {
                             {...register('password')}
                         />
 
-                        <Typography variant="p" color="white">
+                        <Typography color="white">
                             {errors.password?.message}
                         </Typography>
                     </Grid>
@@ -161,7 +161,7 @@ const Register = ({setTabLogin}:RegisterPageProps) => {
                             {...register('passwordAgain')}
                         />
 
-                        <Typography variant="p" color="white">
+                        <Typography color="white">
                             {errors.passwordAgain?.message}
                         </Typography>
                     </Grid>
