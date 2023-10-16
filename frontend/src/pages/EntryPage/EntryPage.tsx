@@ -77,7 +77,7 @@ function EntryPage() {
                     <TabsCustom
                         value={value}
                         onChange={handleChange}
-                        indicatorColor="white"
+                        // indicatorColor="white"
                         textColor="inherit"
                         variant="fullWidth"
                         aria-label="full width tabs example"

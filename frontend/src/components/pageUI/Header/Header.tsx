@@ -14,15 +14,21 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 
 import {Link} from "react-router-dom";
-import {Key, useState} from "react";
+import React, {Key, MouseEventHandler, SetStateAction, useState} from "react";
 import {pages} from "@/common/services";
 
 
-const Header = () => {
+interface IHeaderProps {
+    children?: React.ReactNode;
+    className?: string
+}
 
-    const [anchorElUser, setAnchorElUser] = useState(null);
+const Header = ({className}:IHeaderProps) => {
 
-    const handleOpenSettingsMenu = (event) => {
+    const [anchorElUser, setAnchorElUser] = useState<null>(null);
+
+
+    const handleOpenSettingsMenu = (event: any) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -33,7 +39,7 @@ const Header = () => {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" className={className!}>
                 <Toolbar sx={{justifyContent: "space-between"}}>
 
                     {/* меню бургер */}
@@ -55,7 +61,7 @@ const Header = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseSettingsMenu}
                         >
-                            {pages.map((page, index) => (
+                            {pages.map((page) => (
                                 <MenuItem
                                     onClick={handleCloseSettingsMenu}
                                     key={page.name as Key}

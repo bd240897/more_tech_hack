@@ -50,8 +50,12 @@ export const menuItems = [
     },
 ]
 
-// TODO type
-const menuItemsInit = menuItems.reduce(function (result, element) {
+
+type menuItemsInitType = {
+    [key: string]: boolean
+}
+
+const menuItemsInit:menuItemsInitType = menuItems.reduce(function (result, element) {
     return {
         ...result,
         [element.name]: false,

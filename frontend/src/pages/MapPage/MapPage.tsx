@@ -98,7 +98,7 @@ const MapPage = () => {
                         allDay={(modalData && "allDay" in modalData) ? modalData.allDay as boolean : false}
                         latitude={(modalData && "latitude" in modalData) ? modalData.latitude as string : "empty"}
                         longitude={(modalData && "longitude" in modalData) ? modalData.longitude as string : "empty"}
-                        services={(modalData && "services" in modalData) ? modalData.services as string : []}
+                        services={(modalData && "services" in modalData) ? modalData.services as string : {}}
                     >
                     </CustomModal>
 

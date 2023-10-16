@@ -102,7 +102,7 @@ const Register = ({setTabLogin}:RegisterPageProps) => {
                             {...register('mail')}
                         />
 
-                        <Typography color="white" variant="p">
+                        <Typography color="white">
                             {errors.mail?.message}
                         </Typography>
                     </Grid>

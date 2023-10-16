@@ -10,20 +10,29 @@ const config = {
     key: "4b243459-9b51-4a12-a835-86fb809f0263"
 }
 
+type pointsType = Array<{id: string, coordinates: Array<any>, title: string}>
+
+type atmsType = {
+    atms: Array<{id: string, latitude: string, longitude: string, address: string}>
+}
+
+type officesType = Array<{id: string, latitude: string, longitude: string, address: string}>
+
+
+
 /**
  * Обрабатывает данные для офисов
  */
-const prepareOfficesPointData = (offices) => {
-    const points = []
+const prepareOfficesPointData = (offices: officesType): pointsType => {
 
-    offices.slice().map((el) => // 0, 5
-        points.push(
-            {
-                id: el.id,
-                coordinates: [el.latitude, el.longitude],
-                title: el.address
+    const points = offices.slice().map((element) => // 0, 5
+        {
+            return {
+                id: element.id,
+                coordinates: [element.latitude, element.longitude],
+                title: element.address
             }
-        )
+        }
     )
 
     console.log("source prepareOfficesPointData", offices.slice(0, 5))
@@ -31,22 +40,21 @@ const prepareOfficesPointData = (offices) => {
     return points
 }
 
-
 /**
  * Обрабатывает данные для банкоматов
  * ! создает нвоый массив без префика atms т.е. это лист
  */
-const prepareAtmsPointData = (atms) => {
-    const points = []
+const prepareAtmsPointData = (atms: atmsType): pointsType => {
 
-    atms.atms.slice().map((el) => // 0, 5
-        points.push(
-            {
-                id: el.id,
-                coordinates: [el.latitude, el.longitude],
-                title: el.address
-            }
-        )
+
+    const points = atms.atms.slice().map((element) => // 0, 5
+        {
+            return {
+                id: element.id,
+                coordinates: [element.latitude, element.longitude],
+                title: element.address
+                }
+        }
     )
 
     console.log("source prepareAtmsPointData", atms.atms.slice(0, 5))
@@ -73,8 +81,8 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
     console.log("CustomMap| isAtms", isOffices)
 
 
-    const [pointsAtms, setPointsAtms] = useState([])
-    const [pointsOffices, setPointsOffices] = useState([])
+    const [pointsAtms, setPointsAtms] = useState<pointsType>([])
+    const [pointsOffices, setPointsOffices] = useState<pointsType>([])
 
     /**
      * Грузит данные при открытии страницы
@@ -104,7 +112,9 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
 
         console.log("handleOpenModalWithData", data)
         // получим все данные по id
-        // TODO it
+        // TODO ts
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const foundData = atms.atms.find((el)=>el.id===data.id)
         console.log("foundData", foundData)
 
@@ -184,7 +194,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                      height="75vh"
                      state={mapState}
                 >
-                    {(isAtms & Boolean(pointsAtms.length)) &&
+                    {(isAtms && Boolean(pointsAtms.length)) &&
                         <ObjectManager
                             objects={{
                                 openBalloonOnClick: true,
@@ -201,11 +211,15 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                                 "objectManager.addon.objectsBalloon",
                                 "objectManager.addon.clustersBalloon"
                             ]}
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                            // @ts-ignore
                             instanceRef={ref => {
                                 if (ref && "objects" in ref)
-                                    ref.objects.events.add('click', (e) => {
+                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                    // @ts-ignore
+                                    ref.objects.events.add('click', (event) => {
                                         // Используем айдишник для того, чтобы далее получить инфу по метке
-                                        const objectId = e.get('objectId');
+                                        const objectId = event.get('objectId');
                                         const data = ref.objects.getById(objectId)
                                         handleOpenModalWithData(data)
                                     })
@@ -213,7 +227,7 @@ const CustomMap = ({setModalData, setIsModal, isAtms, isOffices}: CustomMapProps
                         />
                     }
 
-                    {(isOffices & Boolean(pointsOffices.length)) &&
+                    {(isOffices && Boolean(pointsOffices.length)) &&
                         <ObjectManager
                             objects={{
                                 openBalloonOnClick: true,

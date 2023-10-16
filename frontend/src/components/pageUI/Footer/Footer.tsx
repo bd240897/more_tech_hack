@@ -5,6 +5,7 @@ import {Box} from "@mui/material";
 
 interface IFooterProps {
     children?: React.ReactNode;
+    className?: string
 }
 
 function Footer({className}: IFooterProps) {
@@ -18,7 +19,9 @@ function Footer({className}: IFooterProps) {
                 textAlign: "center",
                 padding: "15px",
                 fontWeight: "bold"
-            }}>
+            }}
+                 className={className}
+            >
                 <Box className={styles.footer__block}>
                     © 2023 Borisov Dmitrii
                 </Box>

@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import {ReactNode} from "react";
 
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -16,6 +16,37 @@ const style = {
     p: 4,
 };
 
+
+const mapStatus = {
+    SUPPORTED: 'да',
+    UNSUPPORTED: 'нет',
+    AVAILABLE: 'да',
+    UNAVAILABLE: 'нет',
+    UNKNOWN: 'неизвестно',
+}
+
+type statusType = keyof typeof mapStatus;
+
+type serviceNameType = {
+    wheelchair: string,
+    blind: string,
+    nfcForBankCards: string,
+    qrRead: string,
+    supportsUsd: string,
+    supportsChargeRub: string,
+    supportsEur: string,
+    supportsRub: string,
+}
+
+type serviceNameListType = Array<keyof serviceNameType>
+
+type servicesType = {
+        [K in keyof serviceNameType] : {
+            serviceCapability: statusType,
+            serviceActivity: statusType
+        }
+    }
+
 interface ModalProps {
     isModal: boolean
     handleClose: () => void
@@ -24,7 +55,7 @@ interface ModalProps {
     allDay: boolean
     latitude: string
     longitude: string
-    services: object | {}
+    services: servicesType | {}
     children? : ReactNode
 }
 
@@ -39,17 +70,10 @@ export default function CustomModal({
                                         services = {},
                                     }: ModalProps) {
 
-    const makeServices = (data: object) => {
 
-        const mapStatus = {
-            SUPPORTED: 'да',
-            UNSUPPORTED: 'нет',
-            AVAILABLE: 'да',
-            UNAVAILABLE: 'нет',
-            UNKNOWN: 'неизвестно',
-        }
+    const makeServices = (servicesData: servicesType | {}) => {
 
-        const makeOneService = (name: string, serviceCapability: string, serviceActivity: string) => {
+        const makeOneService = (name: keyof serviceNameType, serviceCapability: statusType, serviceActivity: statusType) => {
             console.log("makeOneService", name)
             return (
                 <>
@@ -66,10 +90,16 @@ export default function CustomModal({
             )
         }
 
-        const serviceNames = Object.keys(data)
+        if (Object.keys(servicesData).length === 0)
+            return <></>
+
+        const serviceNames = Object.keys(servicesData as servicesType) as serviceNameListType
         console.log("serviceNames", serviceNames)
 
-        const checkServiceParams = (serviceParams): boolean => {
+        /**
+         * type guard
+         */
+        const checkServiceParams = (serviceParams: object): boolean => {
             const status = serviceParams && "serviceCapability" in serviceParams && "serviceCapability" in serviceParams;
             console.log("checkServiceParams", status)
             return status
@@ -81,7 +111,7 @@ export default function CustomModal({
                 {
                     serviceNames.map((serviceName) => {
 
-                        const serviceParams = data[serviceName]
+                        const serviceParams = (servicesData as servicesType)[serviceName as keyof serviceNameType]
 
                         if (checkServiceParams(serviceParams))
                             return makeOneService(serviceName, serviceParams.serviceCapability, serviceParams.serviceActivity)

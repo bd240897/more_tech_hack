@@ -69,9 +69,9 @@ export default function CustomDrawer({isDrawer = false,
     /**
      * Тут чисто список
      */
-    const list = (anchor) => (
+    const list = () => (
         <Box
-            sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
+            sx={{width: 'auto'}}
             role="presentation"
             // onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
@@ -86,9 +86,10 @@ export default function CustomDrawer({isDrawer = false,
                             aria-label="left aligned"
                             selected={menuParams[element.name]}
                             key={element.id}
-                            onChange={(e) => {
+                            onChange={(event) => {
+                                const { name } = event.target as HTMLButtonElement;
                                 setMenuParams(prev => {
-                                    return {...prev, [e.target.name]: !prev[e.target.name]}
+                                    return {...prev, [name]: !prev[name]}
                                 });
                                 console.log()
                             }}
@@ -130,7 +131,7 @@ export default function CustomDrawer({isDrawer = false,
                     open={isDrawer}
                     onClose={toggleDrawer(false)}
                 >
-                    {list('bottom')}
+                    {list()}
                 </Drawer>
 
             </>
