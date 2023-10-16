@@ -17,8 +17,8 @@ export const services = [
 
 export const pages = [{name: 'Login', link: "/"},
     {name: 'Map', link: "/map"},
-    // {name: 'About', link: "/about"},
-    // {name: 'Test', link: "/test"},
+    {name: 'About', link: "/about"},
+    {name: 'Test', link: "/test"},
 ];
 
 

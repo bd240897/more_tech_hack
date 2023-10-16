@@ -12,102 +12,38 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    Typography,
+    Container,
+    Stack,
+    Grid,
+    Chip,
+    IconButton
 } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {services, servicesFromData} from "@/common/services";
+import YourSvg from "./icon/no_wallet.svg";
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import NoWallet from "@/pages/TestPage/NoWallet/NoWallet";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrayBlock from "@/pages/TestPage/ArrayBlock/ArrayBlock";
+import CreateWallet from "@/pages/TestPage/CreateWallet/CreateWallet";
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+export default function TestPage() {
 
-
-interface СustomDrawerProps {
-    state?: boolean,
-    setState?: ()=>void
-}
-
-export default function СustomDrawer() {
-
-    // стейт открыт ли или нет
-    const [state, setState] = React.useState(false);
-
-
-    /**
-     * Переключает вкл и выкл меню
-     * anchor - привязка = 'top' | 'left' | 'bottom' | 'right'
-     * таб + шифт - это премещение по меню
-     */
-    const toggleDrawer = (open: boolean) =>
-        (event: React.KeyboardEvent | React.MouseEvent) => {
-            if (
-                event.type === 'keydown' &&
-                ((event as React.KeyboardEvent).key === 'Tab' ||
-                    (event as React.KeyboardEvent).key === 'Shift')
-            ) {
-                return;
-            }
-
-            setState(open);
-        };
-
-    /**
-     * Тут чисто список
-     */
-    const list = (anchor: Anchor) => (
-        <Box
-            sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
-            role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-        >
-
-            {/* сам список ссылоок */}
-            <List>
-                {servicesFromData.map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-
-            <Divider/>
-
-            {/* сам список ссылоок */}
-            <List>
-                {services.map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-
-        </Box>
-    );
 
     return (
-        <div>
-            <>
+        <>
+            <Container sx={{height: "100%"}}>
 
-                <Button onClick={toggleDrawer(true)}>Кнопка</Button>
+                <ArrayBlock/>
 
-                <Drawer
-                    anchor={'bottom'}
-                    open={state}
-                    onClose={toggleDrawer(false)}
-                >
-                    {list('bottom')}
-                </Drawer>
+                <NoWallet/>
 
-            </>
-        </div>
+                <CreateWallet/>
+
+            </Container>
+        </>
     );
 }
