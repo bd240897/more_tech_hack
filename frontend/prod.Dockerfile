@@ -9,6 +9,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run dist
+RUN npm run build
 
-CMD cp -r dist result_build
+CMD cp -r dist result_dist
