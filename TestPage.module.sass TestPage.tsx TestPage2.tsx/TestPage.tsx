@@ -25,10 +25,7 @@ import {services, servicesFromData} from "@/common/services";
 import YourSvg from "./icon/no_wallet.svg";
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-import NoWallet from "@/pages/TestPage/NoWallet/NoWallet";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrayBlock from "@/pages/TestPage/ArrayBlock/ArrayBlock";
-import CreateWallet from "@/pages/TestPage/CreateWallet/CreateWallet";
+
 
 export default function TestPage() {
 
@@ -37,11 +34,13 @@ export default function TestPage() {
         <>
             <Container sx={{height: "100%"}}>
 
-                <ArrayBlock/>
+                {/*<ArrayBlock text={"Добавление лицевого счета"} link={"/"}/>*/}
 
-                <NoWallet/>
+                {/*<NoWallet/>*/}
 
-                <CreateWallet/>
+                {/*<CreateWallet/>*/}
+
+                {/*<ExamplePaper/>*/}
 
             </Container>
         </>

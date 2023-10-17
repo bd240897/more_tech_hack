@@ -14,7 +14,8 @@ import {
     ListItemText,
     Typography,
     Container,
-    Stack
+    Stack,
+    Link
 } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -23,7 +24,9 @@ import YourSvg from "./icon/no_wallet.svg";
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
-export default function NoWallet() {
+import {Link as RouterLink} from "react-router-dom";
+
+export default function Wallet() {
 
 
     return (
@@ -43,21 +46,23 @@ export default function NoWallet() {
                 </Box>
 
                 <Box display={"flex"} justifyContent={"center"} sx={{border: "2px solid black"}}>
-                    <Button variant={"contained"} sx={{p: 3}}>
+                    <Button variant={"contained"} sx={{p: 3}} component={RouterLink} to={"/wallet/create"}>
                         Добавить лицевой счет
                     </Button>
                 </Box>
 
-                <Box sx={{border: "2px solid black"}}>
-                    <Box display={"flex"} justifyContent={"center"} >
-                        {/*<img src={YourSvg} alt="Your SVG"/>*/}
-                        <PersonSearchIcon fontSize={"large"} style={{ color: "red", fontSize:  120}}/>
-                    </Box>
+                <Link component={RouterLink} to={"/wallet/example"} sx={{textDecoration: "none", color: "black"}}>
+                    <Box sx={{border: "2px solid black"}}>
+                        <Box display={"flex"} justifyContent={"center"}>
+                            {/*<img src={YourSvg} alt="Your SVG"/>*/}
+                            <PersonSearchIcon fontSize={"large"} style={{color: "red", fontSize: 120}}/>
+                        </Box>
 
-                    <Typography variant={"body1"} align={"center"} sx={{my: 4, p: 3}}>
-                        Часто задаваемые вопросы
-                    </Typography>
-                </Box>
+                        <Typography variant={"body1"} align={"center"} sx={{my: 4, p: 3}}>
+                            Часто задаваемые вопросы
+                        </Typography>
+                    </Box>
+                </Link>
             </Stack>
         </>
     );

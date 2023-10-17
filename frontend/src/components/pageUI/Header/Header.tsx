@@ -17,6 +17,7 @@ import {Link} from "react-router-dom";
 import React, {Key, MouseEventHandler, SetStateAction, useState} from "react";
 import {pages} from "@/common/services";
 
+import headerImage from "./images/header_icon.png"
 
 interface IHeaderProps {
     children?: React.ReactNode;
@@ -46,7 +47,8 @@ const Header = ({className}:IHeaderProps) => {
                     <Box display={{xs: "block", lg: "none"}}>
                         <Tooltip title="список страниц">
                             <IconButton onClick={handleOpenSettingsMenu} sx={{p: 0}}>
-                                <MenuIcon color={"secondary"}/>
+                                {/*<MenuIcon color={"secondary"}/>*/}
+                                <Box component="img" src={headerImage} sx={{py:2}}/>
                             </IconButton>
                         </Tooltip>
 
@@ -82,15 +84,15 @@ const Header = ({className}:IHeaderProps) => {
                             component={Link}
                             to={"/"}
                             sx={{
-                                mr: 2,
+                                mr: 4,
                                 fontWeight: 200,
-                                fontFamily: 'roboto',
+                                // fontFamily: 'roboto',
                                 color: 'white',
-                                letterSpacing: '.2rem',
+                                // letterSpacing: '.2rem',
                                 textDecoration: 'none',
                             }}
                         >
-                            Educative
+                            Втб комуналка
                         </Typography>
                     </Box>
 
