@@ -30,7 +30,7 @@ import HaveWallet from "./HaveWallet/HaveWallet"
 import {UserContext} from "@/context/WalletExists/WalletExists";
 import {useContext} from "react";
 
-export default function Wallet() {
+export default function WalletPage() {
     // const [isWallet, setIsWallet] = React.useState(false);
 
     const contex = useContext(UserContext);

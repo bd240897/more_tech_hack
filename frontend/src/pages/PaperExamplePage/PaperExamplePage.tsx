@@ -1,11 +1,11 @@
 import React from 'react';
 import {Image} from "@mui/icons-material";
 import {Box} from "@mui/material";
-import example from "../images/example_paper.png"
-import ArrayBlock from "@/pages/TestPage/ArrayBlock/ArrayBlock";
+import example from "@/assets/image/example_paper.png"
+import ArrayBlock from "@/components/pageUI/ArrayBlock/ArrayBlock";
 
 
-const ExamplePaper = () => {
+const PaperExamplePage = () => {
     return (
         <div>
 
@@ -24,4 +24,4 @@ const ExamplePaper = () => {
     );
 };
 
-export default ExamplePaper;
+export default PaperExamplePage;

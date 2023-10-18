@@ -25,7 +25,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 import {Link as RouterLink} from "react-router-dom";
-import no_wallet_2 from "../../icon/no_wallet_2.png"
+import no_wallet_2 from "@/assets/icon/no_wallet_2.png"
 
 
 export default function Wallet() {

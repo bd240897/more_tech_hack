@@ -23,13 +23,13 @@ import {
     MenuItem
 } from '@mui/material';
 import {useNavigate} from "react-router-dom";
-import ArrayBlock from "@/pages/TestPage/ArrayBlock/ArrayBlock";
+import ArrayBlock from "@/components/pageUI/ArrayBlock/ArrayBlock";
 import {UserContext} from "@/context/WalletExists/WalletExists";
 import {useContext} from "react";
 
 
 
-const CreateWallet = () => {
+const CreateWalletPage = () => {
 
     const cheaf = [
         {
@@ -201,4 +201,4 @@ const CreateWallet = () => {
     );
 };
 
-export default CreateWallet;
+export default CreateWalletPage;

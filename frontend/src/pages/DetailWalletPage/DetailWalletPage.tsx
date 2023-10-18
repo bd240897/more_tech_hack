@@ -5,12 +5,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Box} from "@mui/material";
-import ArrayBlock from "@/pages/TestPage/ArrayBlock/ArrayBlock";
+import ArrayBlock from "@/components/pageUI/ArrayBlock/ArrayBlock";
 
-const DetailWallet = () => {
+const DetailWalletPage = () => {
     return (
         <Box sx={{mb:3}}>
-            <ArrayBlock text={"Добавить лицевой счет"} link={"/wallet"}/>
+            <ArrayBlock text={"Счет №54215-048-05"} link={"/wallet"}/>
 
             <Accordion sx={{my: 2}}>
                 <AccordionSummary
@@ -296,4 +296,4 @@ const DetailWallet = () => {
     )
 };
 
-export default DetailWallet;
+export default DetailWalletPage;

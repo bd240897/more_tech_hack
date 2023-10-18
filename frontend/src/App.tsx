@@ -9,14 +9,13 @@ import {colors} from "@mui/material";
 // pages
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
-import MapPage from "@/pages/MapPage/MapPage";
 import EntryPage from "@/pages/EntryPage/EntryPage";
 import AboutPage from "@/pages/AboutPage/AboutPage";
-import CreateWallet from "@/pages/TestPage/CreateWallet/CreateWallet";
+import CreateWalletPage from "@/pages/CreateWalletPage/CreateWalletPage";
 import WalletLayout from "@/layouts/WalletLayout/WalletLayout";
-import ExamplePaper from "@/pages/TestPage/ExamplePaper/ExamplePaper";
-import Wallet from "@/pages/TestPage/Wallet/Wallet";
-import DetailWallet from "@/pages/TestPage/DetailWallet/DetailWallet";
+import PaperExamplePage from "@/pages/PaperExamplePage/PaperExamplePage";
+import WalletPage from "@/pages/WalletPage/WalletPage";
+import DetailWalletPage from "@/pages/DetailWalletPage/DetailWalletPage";
 
 
 // theme
@@ -87,14 +86,13 @@ const App = () => {
                         <Routes>
                             <Route path="/" element={<MainLayout/>}>
                                 <Route index element={<EntryPage/>}/>
-                                <Route path="/map" element={<MapPage/>}/>
                                 <Route path="/about" element={<AboutPage/>}/>
 
                                 <Route path="/wallet" element={<WalletLayout/>}>
-                                    <Route index element={<Wallet/>}/>
-                                    <Route path="create" element={<CreateWallet/>}/>
-                                    <Route path="example" element={<ExamplePaper/>}/>
-                                    <Route path="detail" element={<DetailWallet/>}/>
+                                    <Route index element={<WalletPage/>}/>
+                                    <Route path="create" element={<CreateWalletPage/>}/>
+                                    <Route path="example" element={<PaperExamplePage/>}/>
+                                    <Route path="detail" element={<DetailWalletPage/>}/>
                                 </Route>
 
 
