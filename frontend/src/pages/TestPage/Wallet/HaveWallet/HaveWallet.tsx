@@ -16,33 +16,55 @@ import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
+import AddHomeIcon from '@mui/icons-material/AddHome';
+import GasMeterIcon from '@mui/icons-material/GasMeter';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import PaymentsIcon from '@mui/icons-material/Payments';
+
+const getIconList = (type: string) => {
+    if (type === "home")
+        return  <AddHomeIcon/>
+    else if (type === "gas")
+        return  <AddHomeIcon/>
+    else if (type === "water")
+        return  <WaterDropIcon/>
+    else
+        return  <OtherHousesIcon/>
+}
 
 const Demo = styled('div')(({theme}) => ({
     backgroundColor: theme.palette.background.paper,
 }));
 
 const listWallet = [
-    1, 2, 3, 4, 5, 6
+    {
+        id: "54215-048-05",
+        name: "Клубная ул., д. 3, кв. 48",
+        money: "500,00 ₽",
+        type: "home",
+        status: "expired"
+    },
+    {
+        id: "54215-048-06",
+        name: "Клубная ул., д. 3, кв. 48",
+        money: "500,00 ₽",
+        type: "water",
+        status: "actual"
+    },
+    {
+        id: "54215-048-07",
+        name: "Клубная ул., д. 3, кв. 48",
+        money: "500,00 ₽",
+        type: "gas",
+        status: "actual"
+    }
 ]
 
 const StyledListItem = styled(ListItem)({
     cursor: "pointer",
-    "&$selected": {
-        backgroundColor: "red",
-        color: "white",
-        "& .MuiListItemIcon-root": {
-            color: "white"
-        }
-    },
-    "&$selected:hover": {
-        backgroundColor: "purple",
-        color: "white",
-        "& .MuiListItemIcon-root": {
-            color: "white"
-        }
-    },
     "&:hover": {
-        backgroundColor: "blue",
+        backgroundColor: "gray",
         color: "white",
         "& .MuiListItemIcon-root": {
             color: "white"
@@ -57,30 +79,36 @@ const HaveWallet = () => {
     return (
         <Box>
             <Grid item xs={12} md={6}>
-                <Typography sx={{mt: 4, mb: 2}} variant="h6" component="div">
+
+                <Typography sx={{mt: 4, mb: 2}} variant="h3" align={"center"} component="div">
                     Список счетов
                 </Typography>
+
+
                 <Demo>
                     <List dense={false}>
                         {listWallet.map(element =>
                             <StyledListItem
                                 secondaryAction={
                                     <IconButton edge="end" aria-label="delete">
-                                        <DeleteIcon/>
+                                        <PaymentsIcon sx={{color: element.status === "expired" ? "red" : "green"}}/>
                                     </IconButton>
                                 }
-                                key={element}
-                                onClick={()=>navigate('/wallet/detail')}
+                                key={element.id}
+                                onClick={() => navigate('/wallet/detail')}
                             >
                                 <ListItemAvatar>
                                     <Avatar>
-                                        <FolderIcon/>
+                                        {getIconList(element.type)}
                                     </Avatar>
                                 </ListItemAvatar>
+
                                 <ListItemText
-                                    primary="Single-line item"
-                                    secondary={"Secondary text"}
-                                />
+                                    primary={element.id}
+                                    secondary={element.name}
+                                >
+                                    {element.name}
+                                </ListItemText>
                             </StyledListItem>,
                         )}
                     </List>

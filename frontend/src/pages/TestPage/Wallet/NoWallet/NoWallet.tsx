@@ -25,6 +25,8 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 import {Link as RouterLink} from "react-router-dom";
+import no_wallet_2 from "../../icon/no_wallet_2.png"
+
 
 export default function Wallet() {
 
@@ -39,30 +41,38 @@ export default function Wallet() {
                 sx={{height: "100%"}}
             >
 
-                <Box data-name="no_wallet" component={"div"}>
-                    <Typography variant={"h3"} align={"center"} sx={{my: 4, p: 3, border: "2px solid black"}}>
+                <Box data-name="no_wallet" component={"div"} sx={{mb: 3}}>
+                    <Typography variant={"h3"} align={"center"} sx={{my: 4, p: 3}}>
                         Нет подключенных лицевых счетов
                     </Typography>
                 </Box>
 
-                <Box display={"flex"} justifyContent={"center"} sx={{border: "2px solid black"}}>
+                <Box display={"flex"} justifyContent={"center"}>
                     <Button variant={"contained"} sx={{p: 3}} component={RouterLink} to={"/wallet/create"}>
                         Добавить лицевой счет
                     </Button>
                 </Box>
 
-                <Link component={RouterLink} to={"/wallet/example"} sx={{textDecoration: "none", color: "black"}}>
-                    <Box sx={{border: "2px solid black"}}>
-                        <Box display={"flex"} justifyContent={"center"}>
-                            {/*<img src={YourSvg} alt="Your SVG"/>*/}
-                            <PersonSearchIcon fontSize={"large"} style={{color: "red", fontSize: 120}}/>
-                        </Box>
+                <Box>
 
-                        <Typography variant={"body1"} align={"center"} sx={{my: 4, p: 3}}>
-                            Часто задаваемые вопросы
-                        </Typography>
+                    <Box display={"flex"} justifyContent={"center"} alignContent={"center"} sx={{mb: 3}}>
+                        {/*<img src={YourSvg} alt="Your SVG"/>*/}
+                        <Link component={RouterLink} to={"/wallet/example"}
+                              sx={{textDecoration: "none", color: "black"}}>
+
+                            <Box sx={{border: "4px solid black", p: 3}} borderRadius="50%">
+                                {/*<PersonSearchIcon fontSize={"large"} style={{color: "red", fontSize: 140}}/>*/}
+                                <Box component={"img"} src={no_wallet_2}></Box>
+                            </Box>
+                        </Link>
                     </Box>
-                </Link>
+
+
+                    <Typography variant={"h3"} align={"center"} sx={{my: 4, px: 5, py: 3}}>
+                        Часто задаваемые вопросы
+                    </Typography>
+                </Box>
+
             </Stack>
         </>
     );
