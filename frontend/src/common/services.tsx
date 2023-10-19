@@ -16,7 +16,6 @@ export const services = [
     "Банковские карты"]
 
 export const pages = [{name: 'Login', link: "/"},
-    {name: 'Map', link: "/map"},
     {name: 'About', link: "/about"},
     {name: 'Wallet', link: "/wallet"},
 ];

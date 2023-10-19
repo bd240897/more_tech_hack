@@ -117,7 +117,7 @@ const CreateWalletPage = () => {
 
                 <Stack direction={"row"} sx={{mb: 2}} justifyContent={"space-between"}>
                     <Typography>
-                        Добавить лицевой счет
+                        Получать счета по email
                     </Typography>
                     <Switch
                             defaultChecked
