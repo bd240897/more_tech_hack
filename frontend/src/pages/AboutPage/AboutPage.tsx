@@ -8,7 +8,6 @@ const AboutPage = () => {
                 <Stack sx={{my: 3, height: "100%"}} direction={"column"} alignItems={"center"}
                      justifyContent={"center"}>
 
-
                     <Box sx={{width: "80%"}}>
                         <Grid container sx={{mb:2}}>
                             <Grid item xs={12} sm={4} textAlign={"center"}>

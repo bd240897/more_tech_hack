@@ -1,23 +1,9 @@
-export const servicesFromData = [
-    "Обмен рублей",
-    "Обмен евро",
-    "Оплата QR-кодом",
-]
 
-
-export const services = [
-    "Кредиты",
-    "Депозиты",
-    "Денежные переводы",
-    "Автокредиты",
-    "Ипотека",
-    "Потребительские займы",
-    "Интернет-банкинг",
-    "Банковские карты"]
+// HEADER
 
 export const pages = [{name: 'Login', link: "/"},
-    {name: 'About', link: "/about"},
     {name: 'Wallet', link: "/wallet"},
+    {name: 'About', link: "/about"},
 ];
 
 
