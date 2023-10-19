@@ -48,7 +48,7 @@ const Login = ({setTabRegister}:LoginPageProps) => {
 
     const handleSubmitForm = (data: any) => {
         console.log("handleSubmitForm Login", data)
-        navigate('/map')
+        navigate('/wallet')
     }
 
     /**

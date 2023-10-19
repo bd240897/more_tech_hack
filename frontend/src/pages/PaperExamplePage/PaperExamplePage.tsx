@@ -1,5 +1,4 @@
 import React from 'react';
-import {Image} from "@mui/icons-material";
 import {Box} from "@mui/material";
 import example from "@/assets/image/example_paper.png"
 import ArrayBlock from "@/components/pageUI/ArrayBlock/ArrayBlock";

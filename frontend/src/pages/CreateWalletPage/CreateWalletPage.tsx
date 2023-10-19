@@ -1,23 +1,10 @@
 import * as React from 'react';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {LoginSchema} from "@/utils/yup";
 import {
     Box,
-    Drawer,
     Button,
-    List,
-    Divider,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
     Typography,
-    Container,
     Stack,
-    InputLabel,
-    FormControl,
     TextField,
     Switch,
     MenuItem
@@ -26,61 +13,11 @@ import {useNavigate} from "react-router-dom";
 import ArrayBlock from "@/components/pageUI/ArrayBlock/ArrayBlock";
 import {UserContext} from "@/context/WalletExists/WalletExists";
 import {useContext} from "react";
+import {cheaf, company} from "@/common/services";
 
 
 
 const CreateWalletPage = () => {
-
-    const cheaf = [
-        {
-            value: '1',
-            label: "Поставщик",
-        },
-        {
-            value: '2',
-            label: "АО “Мосэнергосбыт",
-        },
-        {
-            value: '3',
-            label: "ООО “МосОблЕИРЦ",
-        },
-        {
-            value: '4',
-            label: "АО “Мосэнергосбыт + ТКО",
-        },
-        {
-            value: '5',
-            label: "АО “Мосводоканал",
-        },
-    ]
-
-    const company = [
-        {
-            value: '1',
-            label: "Статус отношения к ЛС",
-        },
-        {
-            value: '2',
-            label: "Собственник",
-        },
-        {
-            value: '3',
-            label: "Другое",
-        },
-        {
-            value: '4',
-            label: "Наниматель",
-        },
-        {
-            value: '5',
-            label: "Зарегистрированный",
-        },
-        {
-            value: '6',
-            label: "Проживает",
-        },
-    ];
-
 
     const {
         register,

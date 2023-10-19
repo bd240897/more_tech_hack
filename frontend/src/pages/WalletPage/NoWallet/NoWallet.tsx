@@ -1,28 +1,11 @@
 import * as React from 'react';
-//style
-import styles from './ListPaymentsPage.module.sass';
-
 import {
     Box,
-    Drawer,
     Button,
-    List,
-    Divider,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
     Typography,
-    Container,
     Stack,
     Link
 } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import {services, servicesFromData} from "@/common/services";
-import YourSvg from "./icon/no_wallet.svg";
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 import {Link as RouterLink} from "react-router-dom";
 import no_wallet_2 from "@/assets/icon/no_wallet_2.png"
@@ -56,12 +39,9 @@ export default function Wallet() {
                 <Box>
 
                     <Box display={"flex"} justifyContent={"center"} alignContent={"center"} sx={{mb: 3}}>
-                        {/*<img src={YourSvg} alt="Your SVG"/>*/}
                         <Link component={RouterLink} to={"/wallet/example"}
                               sx={{textDecoration: "none", color: "black"}}>
-
                             <Box sx={{border: "4px solid black", p: 3}} borderRadius="50%">
-                                {/*<PersonSearchIcon fontSize={"large"} style={{color: "red", fontSize: 140}}/>*/}
                                 <Box component={"img"} src={no_wallet_2}></Box>
                             </Box>
                         </Link>

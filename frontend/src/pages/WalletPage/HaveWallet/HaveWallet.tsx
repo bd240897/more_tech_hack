@@ -4,23 +4,17 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import FolderIcon from '@mui/icons-material/Folder';
-import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
 import AddHomeIcon from '@mui/icons-material/AddHome';
-import GasMeterIcon from '@mui/icons-material/GasMeter';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import {listWallet} from "@/common/services";
 
 const getIconList = (type: string) => {
     if (type === "home")
@@ -36,30 +30,6 @@ const getIconList = (type: string) => {
 const Demo = styled('div')(({theme}) => ({
     backgroundColor: theme.palette.background.paper,
 }));
-
-const listWallet = [
-    {
-        id: "54215-048-05",
-        name: "Клубная ул., д. 3, кв. 48",
-        money: "500,00 ₽",
-        type: "home",
-        status: "expired"
-    },
-    {
-        id: "54215-048-06",
-        name: "Клубная ул., д. 3, кв. 48",
-        money: "500,00 ₽",
-        type: "water",
-        status: "actual"
-    },
-    {
-        id: "54215-048-07",
-        name: "Клубная ул., д. 3, кв. 48",
-        money: "500,00 ₽",
-        type: "gas",
-        status: "actual"
-    }
-]
 
 const StyledListItem = styled(ListItem)({
     cursor: "pointer",
